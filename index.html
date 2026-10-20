@@ -2,17 +2,52 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f5f9f8" />
-    <meta name="description" content="寿来 · 本地优先的轻量饮食记录应用" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="icon" href="/icons/icon-192.png" />
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-    <title>寿来</title>
-    <script type="module" crossorigin src="/assets/index-DB_dqJsc.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BJtDo3E3.css">
+    <title>寿来 · 新地址</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #f5f9f8; color: #203c34; font: 16px/1.7 system-ui, sans-serif; }
+      main { max-width: 440px; margin: 12vh auto; padding: 24px; }
+      h1 { font-size: 24px; }
+      p { color: #61756e; overflow-wrap: anywhere; }
+      a { display: block; margin-top: 24px; padding: 14px; border-radius: 16px; background: #188568; color: white; text-align: center; text-decoration: none; }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <main>
+      <h1>寿来有了固定的新地址</h1>
+      <p>新地址：<strong>/shoulai/</strong></p>
+      <p>同一浏览器中的现有记录会继续保留。若尚未备份，请先保留一份导出的备份文件；不要清除网站数据。</p>
+      <p>请先关闭其他寿来窗口，再进入新版。确认记录正常后，可从新地址添加桌面入口。</p>
+      <a id="continue" href="/shoulai/">进入寿来</a>
+    </main>
+    <script>
+      const link = document.getElementById('continue');
+      link.href = '/shoulai/' + location.hash;
+      // 只注销经身份握手确认的根路径迁移 SW，不操作新子路径或其他项目的 SW。
+      async function retireMigrationWorker() {
+        if (!('serviceWorker' in navigator)) return;
+        const registration = await navigator.serviceWorker.getRegistration('/');
+        if (!registration || registration.scope !== location.origin + '/' || !registration.active) return;
+        const channel = new MessageChannel();
+        const identity = await new Promise(resolve => {
+          const timer = setTimeout(() => { channel.port1.close(); resolve(null); }, 1000);
+          channel.port1.onmessage = event => {
+            clearTimeout(timer);
+            channel.port1.close();
+            resolve(event.data);
+          };
+          registration.active.postMessage({ type: 'SHOULAI_MIGRATION_PING' }, [channel.port2]);
+        });
+        if (identity === 'shoulai-root-migration-v1') await registration.unregister();
+      }
+      const cleanup = retireMigrationWorker().catch(() => undefined);
+      link.addEventListener('click', async event => {
+        event.preventDefault();
+        await Promise.race([cleanup, new Promise(resolve => setTimeout(resolve, 1500))]);
+        location.assign(link.href);
+      });
+    </script>
   </body>
 </html>

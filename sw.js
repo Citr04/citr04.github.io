@@ -1,1 +1,11 @@
-if(!self.define){let e,s={};const i=(i,n)=>(i=new URL(i+".js",n).href,s[i]||new Promise(s=>{if("document"in self){const e=document.createElement("script");e.src=i,e.onload=s,document.head.appendChild(e)}else e=i,importScripts(i),s()}).then(()=>{let e=s[i];if(!e)throw new Error(`Module ${i} didn’t register its module`);return e}));self.define=(n,o)=>{const r=e||("document"in self?document.currentScript.src:"")||location.href;if(s[r])return;let t={};const c=e=>i(e,r),d={module:{uri:r},exports:t,require:c};s[r]=Promise.all(n.map(e=>d[e]||c(e))).then(e=>(o(...e),t))}}define(["./workbox-9c191d2f"],function(e){"use strict";self.addEventListener("message",e=>{e.data&&"SKIP_WAITING"===e.data.type&&self.skipWaiting()}),e.clientsClaim(),e.precacheAndRoute([{url:"manifest.webmanifest",revision:"1c74cfee1f3cb7653fc14b4cf181833f"},{url:"index.html",revision:"3b2cf8b9b9c252deb33fcf7e3bbd3e8d"},{url:"icons/maskable-512.png",revision:"582907f375b1291b75b5ede55ada537e"},{url:"icons/icon-512.png",revision:"582907f375b1291b75b5ede55ada537e"},{url:"icons/icon-192.png",revision:"0f26001a5e8bf9d2275f9feb34d02c01"},{url:"icons/apple-touch-icon.png",revision:"181ee2ddd95abebe15f7772dc777dad4"},{url:"assets/workbox-window.prod.es5-Bd17z0YL.js",revision:null},{url:"assets/index-DB_dqJsc.js",revision:null},{url:"assets/index-BJtDo3E3.css",revision:null}],{}),e.cleanupOutdatedCaches(),e.registerRoute(new e.NavigationRoute(e.createHandlerBoundToURL("index.html")))});
+// 旧根路径寿来 SW 的迁移版本：不拦截请求、不删除数据、不主动刷新客户端。
+// 与旧应用约定相同，等待用户点击更新发送 SKIP_WAITING 后才接管。
+self.addEventListener('message', event => {
+  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
+  if (event.data?.type === 'SHOULAI_MIGRATION_PING') {
+    event.ports[0]?.postMessage('shoulai-root-migration-v1');
+  }
+});
+self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim());
+});
