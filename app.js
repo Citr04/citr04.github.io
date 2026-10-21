@@ -464,3 +464,53 @@ const onWheel = event => {
 // 日志页根本没有这一段，阅读页保持完全原生的滚动。
 if (!NO_WHEEL_SNAP) window.addEventListener('wheel', onWheel, { passive: false });
 }   // ← 首页段到此为止，以上只在首页执行
+
+
+// 寿来手机安装入口；实验室仅提供安装指引，安装在 /shoulai/ 完成。
+{
+  if (document.querySelector('#install-shoulai')) {
+    const installGuide = document.querySelector('#install-guide');
+    const installEntry = document.querySelector('#install-shoulai');
+    // 手机判断独立于窗口宽度，桌面缩窄窗口不会出现安装入口。
+    const userAgent = navigator.userAgent;
+    const isPhone = navigator.userAgentData?.mobile ?? /iPhone|iPod|Android.*Mobile|Windows Phone/i.test(userAgent);
+    const standalone = window.matchMedia('(display-mode: standalone)');
+    const updateInstallVisibility = () => {
+      installEntry.hidden = !isPhone || standalone.matches || navigator.standalone === true;
+      if (installEntry.hidden && installGuide.open) installGuide.close();
+    };
+    updateInstallVisibility();
+    standalone.addEventListener('change', updateInstallVisibility);
+    window.addEventListener('appinstalled', () => {
+      installEntry.hidden = true;
+      if (installGuide.open) installGuide.close();
+    });
+    installEntry.addEventListener('click', () => {
+      const steps = installGuide.querySelectorAll('li');
+      const extra = installGuide.querySelector('.install-ios');
+      const isiPhone = /iPhone|iPod/i.test(userAgent);
+      if (isiPhone) {
+        const safari = /Safari/i.test(userAgent) && !/CriOS|EdgiOS|FxiOS|OPiOS/i.test(userAgent);
+        steps[0].textContent = safari ? '先打开寿来应用。' : '先打开寿来；若当前浏览器未提供“添加到主屏幕”，请用 Safari 打开寿来。';
+        steps[1].textContent = '在浏览器分享菜单中选择“添加到主屏幕”，确认名称后点“添加”。';
+        extra.textContent = '请在寿来应用页面操作，确保主屏幕图标打开的是寿来。';
+      } else {
+        const browserName = /EdgA/i.test(userAgent) ? 'Edge' : /Chrome/i.test(userAgent) ? 'Chrome' : '浏览器';
+        steps[0].textContent = `先在 ${browserName} 中打开寿来应用。`;
+        steps[1].textContent = '若页面出现安装按钮，点击并确认；也可在浏览器菜单中选择“安装应用”或“添加到主屏幕”。';
+        extra.textContent = '安装选项由浏览器提供；未出现时可以先直接使用网页版。';
+      }
+      installGuide.showModal();
+    });
+    installGuide.querySelector('.install-close').addEventListener('click', () => installGuide.close());
+    installGuide.addEventListener('click', event => {
+      if (event.target !== installGuide) return;
+      const rect = installGuide.getBoundingClientRect();
+      if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) installGuide.close();
+    });
+    installGuide.addEventListener('close', () => {
+      if (!installEntry.hidden) installEntry.focus();
+    });
+
+  }
+}
