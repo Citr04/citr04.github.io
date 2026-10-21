@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>日志 · ORIN Lab</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" type="image/svg+xml" href="/assets/orin-logo.svg">
+  <!-- 页头用思源黑体子集，先预载，免得页头先渲染成苹方再跳字（正文仍走系统字体栈） -->
+  <link rel="preload" href="/assets/noto-sans-sc-subset-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head><body><div id="journal">
+  <a class="skip" href="#journal-content">跳到日志内容</a>
+  <!-- 这段页头与首页 index.html 里那份逐字相同，只有四处不同：品牌与「首页」指向 / 而不是
+       #orin-top（日志页没有这个锚点）、「项目」指回首页的项目区、当前页标记在「日志」上、
+       当前项的 aria-current 是 "page"（每篇日志用 "true"，它属于这一节而不是这一页本身）。
+       改导航项时首页、本文件、journal-template.html 三处要一起改，改完跑 npm run check。 -->
+  <header id="site-head">
+    <a class="brand" href="/" aria-label="ORIN Lab 首页"><img class="mark" src="/assets/orin-logo.svg" alt="橙色 O 形标识"><span class="brand-name"><span>澄心实验室</span><span>ORIN Lab</span></span></a>
+    <nav aria-label="主导航"><a href="/">首页</a><a href="/#orin-projects">项目</a><a class="active" aria-current="page" href="/journal/">日志</a><button data-panel="about">关于</button><button data-panel="contact">联系</button></nav>
+    <button class="menu" aria-label="导航" aria-expanded="false"></button>
+  </header>
+
+  <article id="journal-content" class="journal-index">
+    <!-- list-head 只在本页用：宽屏时它是被裁掉的（见 styles.css），窄屏才显示这个标题 -->
+    <header class="list-head"><h1>日志</h1></header>
+
+    <!-- 每条 = 左侧配图 + 右侧文字（见 styles.css 的「#journal .list」一组规则）。
+         配图与标题指同一篇，读屏和键盘只需要一个入口：外层 a 标 aria-hidden 并去掉
+         Tab 位，img 用空 alt 当装饰图，标题链接照旧可达，也不会多念一遍。 -->
+    <ul class="list">
+      <li>
+        <a class="thumb" href="/journal/2026-09-20-shengsi-qulai.html" tabindex="-1" aria-hidden="true"><img src="/journal/images/2026-09-20-shengsi-qulai.jpg" alt="" width="540" height="540" loading="lazy" decoding="async"></a>
+        <div class="entry">
+          <h2><a href="/journal/2026-09-20-shengsi-qulai.html">生死去来，飞鸿印雪</a></h2>
+          <time datetime="2026-09-20">2026-09-20</time>
+          <p>从很久以前，我一直想开辟一块属于自己的空间，它不是微信朋友圈，不是小红书，不是任何论坛，我可以自己把它摆弄成喜欢的样子，塞进去我喜欢的元素，把脑子里纠缠不清的材料堆砌成自己的城池。<br>无论是「Syven/思闻」还是「ORIN/澄心」的词都与我的名字有些关联，也有些我用了数年甚至十数年的冲浪痕迹...</p>
+          <a class="read-more" href="/journal/2026-09-20-shengsi-qulai.html" aria-label="阅读全文：生死去来，飞鸿印雪">阅读全文 <span aria-hidden="true">→</span></a>
+        </div>
+      </li>
+    </ul>
+
+  </article>
+
+  <dialog id="nav-panel" aria-label="导航"><button class="close" aria-label="关闭">×</button></dialog>
+  <dialog id="info-panel" aria-labelledby="panel-title"><button class="close" aria-label="关闭">×</button><h2 id="panel-title"></h2><div id="panel-copy"></div></dialog>
+</div></body></html>

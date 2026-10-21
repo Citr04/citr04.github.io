@@ -1,0 +1,344 @@
+
+    #orin-study{--paper:#fcfbf8;--ink:#282925;--muted:#76776e;--line:#e6e5de;--tile:#f0efe9;color:var(--ink);background:var(--paper);font-family:Arial,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;color-scheme:light}
+    #orin-study *{box-sizing:border-box}#orin-study button,#site-head button,#nav-panel button,#info-panel button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}#orin-study a,#site-head a,#nav-panel a,#info-panel a{color:inherit;text-decoration:none}#orin-study button:focus-visible,#orin-study a:focus-visible,#site-head button:focus-visible,#site-head a:focus-visible,#nav-panel button:focus-visible,#nav-panel a:focus-visible,#info-panel button:focus-visible,#journal .skip:focus-visible{outline:2px solid #ff7900;outline-offset:6px}
+    #orin-study .hero{height:650px;position:relative;display:flex;flex-direction:column}#site-head{padding:34px 46px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:Arial,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}#site-head .brand{display:flex;gap:12px;align-items:center;flex-shrink:0}#site-head .mark{width:45px;height:45px}#site-head .brand-name{display:flex;flex-direction:column;gap:5px;font-size:16px;line-height:1.15;font-weight:400}#site-head .brand-name span:last-child{font-size:16px;letter-spacing:.02em}#site-head nav{display:flex;gap:25px;align-items:center;font-size:12px}#site-head .active{position:relative}#site-head .active:after{content:"";position:absolute;bottom:-10px;left:50%;width:3px;height:3px;border-radius:50%;background:#ff7900}
+    /* 下内距 4svh 让居中内容整体上移 2svh，即视觉居中略高于几何中心。
+   padding 的百分比按宽度解析，所以这里必须用 svh 才能随视口高度等比。 */
+#orin-study .motto-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 22px 4svh}#orin-study h1{font-family:"EB Garamond",Georgia,"Times New Roman",serif;font-weight:400;font-size:42px;line-height:1.15;letter-spacing:-.015em;font-kerning:normal;text-align:center;margin:0}#orin-study .down{position:absolute;bottom:36px;left:calc(50% - 22px);width:44px;display:flex;flex-direction:column;align-items:center;min-height:44px;justify-content:center;padding:5px}#orin-study .down .arrow{font-size:20px;line-height:1;color:var(--muted)}
+    #orin-study .projects{padding:72px 70px 82px;border-top:1px solid var(--line)}#orin-study .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:38px}#orin-study h2{font-size:22px;font-weight:400;margin:0}#orin-study .eyebrow{font-size:10px;letter-spacing:.16em;color:var(--muted);display:block;margin-bottom:12px}#orin-study .sample-note{font-size:11px;color:var(--muted)}#orin-study .project-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}#orin-study .preview{height:230px;background:var(--tile);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}#orin-study .caption{display:flex;align-items:center;justify-content:space-between;margin-top:23px;gap:10px}#orin-study h3{font-size:17px;font-weight:400;margin:0}#orin-study .status{font-size:10px;color:var(--muted)}#orin-study .desc{font-size:12px;line-height:1.9;color:var(--muted);margin:10px 0 0}#orin-study .timeline{width:78%;height:126px;position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}#orin-study .track{position:absolute;left:0;right:0;height:1px;background:var(--line)}#orin-study .track:nth-child(1){top:36px}#orin-study .track:nth-child(2){top:82px}#orin-study .event{position:absolute;height:7px;background:var(--muted);opacity:.45;border-radius:1px}#orin-study .event:nth-child(3){top:33px;left:14%;width:31%}#orin-study .event:nth-child(4){top:79px;left:39%;width:42%}#orin-study .cursor{position:absolute;left:58%;top:0;bottom:0;border-left:1px solid #ff7900}#orin-study .cursor:before{content:"";display:block;width:5px;height:5px;background:#ff7900;border-radius:50%;margin-left:-3px;margin-top:-3px}#orin-study .preview-label{position:absolute;bottom:15px;left:18px;font-size:9px;letter-spacing:.12em;color:var(--muted)}#orin-study .sculpture{width:100px;height:100px;border:1px solid var(--muted);border-radius:50%;position:relative;opacity:.7;margin-top:-36px}#orin-study .sculpture:before{content:"";position:absolute;width:60px;height:60px;border:1px solid #ff7900;border-radius:50%;left:19px;top:19px}#orin-study .sculpture:after{content:"";position:absolute;top:99px;height:48px;left:49px;border-left:1px solid var(--muted)}#orin-study .base{position:absolute;width:55px;height:16px;border:1px solid var(--muted);border-radius:50%;top:calc(50% + 72px);opacity:.7}#orin-study footer{margin:0 46px;padding:27px 0 30px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:10px;letter-spacing:.02em;color:var(--muted)}
+    @media(max-width:650px){#site-head{padding:25px 23px;flex-wrap:wrap;gap:25px}#site-head nav{width:100%;gap:0;justify-content:flex-end;font-size:11px}#orin-study .hero{height:600px}#orin-study h1{font-size:32px}#orin-study .projects{padding:48px 24px}#orin-study .project-grid{grid-template-columns:1fr;gap:35px}#orin-study .section-head{align-items:flex-start;gap:12px}#orin-study .sample-note{max-width:100px;line-height:1.6;text-align:right}#orin-study footer{margin:0 24px;gap:18px;flex-wrap:wrap}}
+  
+html{scroll-behavior:smooth}body{margin:0}body:has(dialog[open]){overflow:hidden}#orin-study{min-height:100svh}#orin-study .hero{height:100svh;min-height:360px}#site-head{padding:28px clamp(24px,4.5vw,80px);position:relative;z-index:1}#site-head .brand-name{font-size:18px;gap:6px}#site-head .brand-name span:last-child{font-size:18px}#site-head .mark{width:50px;height:50px}#site-head nav{font-size:14px;gap:30px}#site-head nav>button{padding:8px 0}#site-head nav a{padding:8px 0}#site-head nav a.active:after{bottom:-3px}#orin-study h1{font-size:clamp(42px,3.8966667vw,58.333333px)}#orin-study .projects{padding:90px max(6vw,24px) 110px}#orin-study .project-grid,#orin-study .section-head{max-width:1200px;margin-left:auto;margin-right:auto}#orin-study .preview{height:clamp(230px,25vw,350px)}#orin-study .desc{font-size:16px}#orin-study h3{font-size:21px}#orin-study h2{font-size:27px}#orin-study .status,#orin-study .sample-note,#orin-study .eyebrow,#orin-study .preview-label{font-size:12px}#orin-study footer{font-size:12px;width:min(1200px,calc(100% - 2 * max(6vw,24px)));margin:0 auto}dialog#info-panel,dialog#nav-panel{color:var(--ink);background:var(--paper);border:1px solid var(--line);width:min(520px,calc(100% - 40px));padding:44px;box-sizing:border-box;font-family:Arial,"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif}dialog#info-panel::backdrop,dialog#nav-panel::backdrop{background:rgb(0 0 0 / .25)}dialog#info-panel h2{margin:0 0 25px}dialog#info-panel p{font-size:16px;line-height:1.9;color:var(--muted)}dialog#info-panel .close,dialog#nav-panel .close{float:right;margin:-20px -20px 0 0;min-width:44px;min-height:44px;font-size:24px}#orin-study .skip,#journal .skip{position:absolute;top:-100px;left:20px;z-index:3;background:var(--paper);padding:12px;color:inherit;text-decoration:none}#orin-study .skip:focus,#journal .skip:focus{top:10px}#orin-study a:hover,#orin-study nav button:hover,#site-head a:hover,#site-head nav button:hover,#nav-panel a:hover,#nav-panel nav button:hover{color:#b65300}
+@media(min-width:1600px){#site-head{padding-top:34px}#orin-study .project-grid{gap:50px}}
+@media(max-width:700px){#site-head{padding:24px;gap:25px}#site-head nav{width:100%;justify-content:flex-end;gap:12px;font-size:14px;flex-wrap:wrap}#orin-study .hero{min-height:560px}#site-head .brand-name,#site-head .brand-name span:last-child{font-size:16px}#site-head .mark{width:44px;height:44px}#orin-study h1{font-size:clamp(29px,7vw,42px)}#orin-study .project-grid{grid-template-columns:1fr;gap:42px}#orin-study .projects{padding:58px 24px 64px}#orin-study .section-head{gap:20px}#orin-study .sample-note{line-height:1.6;text-align:right;max-width:120px}#orin-study .preview{height:260px}#site-head nav button,#site-head nav a{min-height:44px;display:flex;align-items:center}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* 关于卡片：静态保持纯色，裂解画布留在 dialog 顶层并覆盖整个视口。 */
+dialog#info-panel[data-kind="about"]{
+  isolation:isolate;max-height:calc(100svh - 40px);
+  padding:calc(58 * var(--unit, 1px)) calc(44 * var(--unit, 1px)) calc(44 * var(--unit, 1px));
+  background:#fcfbf8;color:#282925;
+}
+dialog#info-panel[data-kind="about"] #panel-title{display:none}
+dialog#info-panel[data-kind="about"] #panel-copy{position:relative;text-align:center;font-size:calc(16 * var(--unit, 1px));cursor:pointer}
+dialog#info-panel[data-kind="about"] p{color:#282925;margin:0 0 1em}
+dialog#info-panel[data-kind="about"] p:last-child{margin-bottom:0}
+dialog#info-panel[data-kind="about"] .close{position:absolute;z-index:2;top:10px;right:10px;float:none;margin:0}
+dialog#info-panel[data-kind="about"] #panel-copy:focus-visible{outline:1px solid #76776e;outline-offset:8px}
+dialog#info-panel[data-kind="about"][data-fracture="running"]{background:transparent;border-color:transparent;overflow:visible}
+dialog#info-panel[data-fracture="running"] #panel-copy,
+dialog#info-panel[data-fracture="running"] .close{opacity:0}
+dialog#info-panel[data-fracture="running"] .close:focus-visible{opacity:1;background:#fcfbf8}
+dialog#info-panel[data-fracture="running"]::backdrop{background:rgb(0 0 0 / var(--fracture-backdrop,.25))}
+dialog#info-panel .about-fracture{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:1}
+@media(max-width:700px){dialog#info-panel[data-kind="about"]{padding:58px 28px 36px}}
+
+/* Header proportions: keep the brand prominent while making navigation easier to scan. */
+#site-head .brand{gap:13px}
+#site-head .mark{width:52px;height:52px}
+#site-head .brand-name,#site-head .brand-name span:last-child{font-size:19px}
+/* 中英文两行贴成一个字标：间距全部交给行高，gap 归零，行高即间距旋钮。
+   行高 1.15 时两行墨迹间距约 6.5px（1 时是 3.5px，每加 0.05 约加 1px）。
+   英文行没有降部，行盒内墨迹偏低，居中后整体偏上 2px，下移补回光学居中。 */
+#site-head .brand-name{gap:0;line-height:1.15;position:relative;top:2px}
+#site-head nav{font-size:16px;gap:24px;align-self:flex-start;margin-top:-4px}
+#site-head nav>a,#site-head nav>button{padding:8px 0 13px;line-height:1.35}
+#site-head nav a.active::after{width:4px;height:4px;bottom:9px}
+
+
+@media(max-width:700px){
+  /* 品牌在窄屏收一号：44px 的 logo 在 390px 屏上占到屏宽 11%，是桌面的 3.2 倍，
+     比站点自己的标题（29px）还大，层级倒挂。缩到 32px / 15px 后标题重新是最大的一号。
+     .brand 补 5px 纵向内边距，把品牌链接的可点高度补回 44px。 */
+  #site-head .brand{gap:11px;padding:5px 0}
+  #site-head .mark{width:32px;height:32px}
+  #site-head .brand-name,#site-head .brand-name span:last-child{font-size:15px}
+  #site-head .brand-name{gap:0;line-height:1.15;position:relative;top:2px}
+  /* 窄屏导航的间距与对齐。跑得动 JS 时这一层用不上——导航会被搬进右上角的抽屉
+     （见下方「窄屏导航」那段），下面是没跑 JS 时的退路：651-700px 时导航与品牌同行，
+     被 width:100% 压到剩余宽度；≤650px 时 header 换行（上面那处 flex-wrap:wrap），
+     导航整行走第二行。两种情形原先都用 space-between 把五个按钮摊满整行，15px 的字
+     之间会空出七十多甚至一百多 px，很散；改成靠右收拢，间距取 1.5em——桌面是 24px
+     间距配 16px 字号，同一个比例，700 与 701 两侧的间隙因此接得上。 */
+  #site-head nav{font-size:15px;gap:1.5em;align-self:auto;margin-top:0}
+  #site-head nav>a,#site-head nav>button{min-height:44px;padding:8px 0 13px}
+
+}
+
+/* 窄屏把导航收进右上角的菜单抽屉：搬的是同一个 <nav> 元素（见 app.js），
+   不复制一份菜单，改导航项只改 index.html 里那一处。
+   触发点的三条线用 CSS 画，不用 ☰ 字符——U+2630 不在思源黑体里，写成字符就会
+   掉到系统字体，字形字重都不可控，正是 npm run check 要拦的那种静默回退。
+   触发点只在 JS 把导航搬走后才显示（页头元素上的 .nav-collapsed）：没跑 JS 时导航
+   仍折在 header 里，露出一个按不动的按钮反而更糟。 */
+#site-head .menu{display:none}
+#site-head.nav-collapsed .menu{
+  display:flex;align-items:center;justify-content:center;width:44px;height:44px;
+  margin-right:-11px;   /* 负边距让三条线（而不是 44px 的盒子）对齐右侧内边距 */
+}
+#site-head.nav-collapsed .menu::before{
+  content:"";width:18px;height:2px;background:currentColor;
+  box-shadow:0 -6px 0 currentColor,0 6px 0 currentColor;
+}
+
+/* 抽屉里的导航竖排。导航被搬进抽屉后就不再是页头的后代，#site-head nav 那一整套规则
+   整个不再命中它——所以这里不是「提权覆盖」，而是「独此一份」：display/flex-wrap/gap/
+   padding 以及行高、外边距都得自己写全，漏掉哪一条就会掉回初始值。 */
+#nav-panel nav{display:flex;flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:0;width:100%;font-size:17px;margin-top:0;line-height:1.35}
+#nav-panel nav>a,#nav-panel nav>button{
+  display:flex;align-items:center;width:100%;min-height:52px;
+  padding:0;text-align:left;border-bottom:1px solid var(--line);
+}
+#nav-panel nav>:last-child{border-bottom:0}
+/* 「首页」的当前态：header 里橙点标在字下方，竖排列表里改标在行右端 */
+#nav-panel nav a.active::after{left:auto;right:0;top:50%;bottom:auto;margin-top:-2px;width:4px;height:4px}
+
+/* 页脚横线与内容列同宽。内容列的宽度是 .projects 的 max(6vw,24px) 内距加 1200px 上限，
+   而页脚原本用 clamp(24px,4.5vw,80px) 单独算一遍，两套算法在宽屏上越差越多——1600px
+   以上内容列被 1200px 卡住不再增长，页脚还在往外走，2560px 时已差 600px。这里复算同一个
+   列宽，页脚的横线和文字就落在项目栅格的左右边界上，不再有第三个左边界。 */
+@media(max-width:700px){
+  #orin-study footer{width:min(1200px,calc(100% - 48px))}
+}
+/* 字体：思源黑体 / Noto Sans SC（SIL OFL 1.1），按站内实际用字做子集。
+   Regular 含全站 146 个字符（139 个汉字 + 7 个中文标点，21KB）；Light 只含首屏
+   题辞那 17 个汉字（3.2KB），题辞因此比正文细一号，用字重而非换字族来区分层级。
+   新增文案若引入子集外的字，会回退到系统字体——需重新生成子集，配方见 README。 */
+@font-face{
+  font-family:"Noto Sans SC";
+  src:url("/assets/noto-sans-sc-subset-regular.woff2") format("woff2");
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:"Noto Sans SC";
+  src:url("/assets/noto-sans-sc-subset-light.woff2") format("woff2");
+  font-weight:300;font-style:normal;font-display:swap;
+}
+/* EB Garamond Regular（SIL OFL 1.1），拉丁题辞专用。子集只含 `Non omnis moriar.`
+   这 10 个字符，2KB；可变字体在生成时固定到 400 字重。布局表只保留 kern——全量
+   特性会经布局闭包拖进 78 个变体字形，子集涨到 5.8KB。生成见 scripts/eb-garamond-subset.py。 */
+@font-face{
+  font-family:"EB Garamond";
+  src:url("/assets/eb-garamond-subset-regular.woff2") format("woff2");
+  font-weight:400;font-style:normal;font-display:swap;
+}
+/* 题辞下方的中文一行，出自明·宋濂《大天界寺住持白庵禅师行业碑铭》：
+   「生死去来兮不碍真圆，飞鸿印雪兮爪趾宛然。」窄屏在两句之间断行。
+
+   站上省掉了原文中间那个逗号，改用两句间的空隙代替，所以下面那个 column-gap
+   就是那个逗号的替身，别压到看不见。桌面取值 .5em（半个字，2026-09-20 由 1em
+   收到这里，原先是一个全角空格的宽度）。
+
+   桌面端拉丁行的字号由这一行推出：42 : 18 = 7 : 3，两条 clamp 的斜率与上限
+   （3.8966667vw / 58.333333px、1.67vw / 25px）是同一个 7/3，下限在同一个宽度
+   （1078px）同时触底，所以从 701px 到宽屏，拉丁行始终是中文行的 7/3 倍字号。
+   42px 同时是 ≤700px 那套的上限，拉丁行在断点两侧都是单行，下限取 42 而非更低，
+   窗口从 700 加宽到 701 时标题才不会原地缩一号。
+
+   EB Garamond 比 Georgia 窄约 12%，同一字号下拉丁行比中文行短——基准 1470px 时
+   是 409px 对 466px，两端各短 28px。2026-09-20 决定接受这个比例，不再维持此前
+   Georgia 时代的「两行等宽」；字距也随字体从 -0.025em 收到 -0.015em。
+
+   中文这行本身仍是 18px / 20px 两档：20px 在 700px 处数值上也接得上，代价是
+   701px 时掉回 18px，而那一瞬它正好从上下两句并回一行，看不出来。 */
+#orin-study .motto-zh{
+  display:flex;justify-content:center;column-gap:.5em;
+  margin:0;
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+  font-weight:300;
+  font-size:clamp(18px,1.67vw,25px);
+  line-height:1.4;
+  color:var(--muted);
+  text-align:center;
+}
+#orin-study .motto-zh span{white-space:nowrap}
+/* 窄屏改为上下两句，贴合这副对联本身的上下句结构；单行排到手机上会比拉丁标语还宽 */
+@media(max-width:700px){
+  #orin-study .motto-zh{flex-direction:column;row-gap:.1em;font-size:20px}
+}
+
+/* 两屏高度独立于内容缩放；第二屏可随内容自然增长，页脚不使用固定高度。 */
+#orin-study .project-screen{min-height:100svh;display:flex;flex-direction:column}
+#orin-study .projects{flex:1}
+
+/* 以 1470px 宽的截图为基准。常规屏内容宽约 81.6%，大屏最多放大 2.2 倍。
+   高度同时限制比例，避免超宽但矮的窗口把文字和卡片放得过大。
+   使用布局尺寸而非 transform/zoom，让锚点、滚动量和文字重排保持真实。 */
+@media(min-width:701px){
+  /* --unit 必须定义在页面容器上，不能定义在页头上。两个弹窗是页头的兄弟（在页面容器里），
+     拿不到定义在页头上的 --unit，而 `calc(520 * var(--unit))` 在计算值阶段解不出变量，
+     整条声明会失效、宽度掉回 auto。定义在容器上，页头与弹窗都能继承到。 */
+  #orin-study,#journal{
+    --unit:clamp(1px,min(.06802721vw,.125svh),2.2px);
+  }
+  #orin-study{
+    --content-width:min(81.63265vw,calc(1200 * var(--unit)));
+  }
+  #site-head{padding:calc(28 * var(--unit)) clamp(24px,4.5vw,176px)}
+  #site-head .brand{gap:calc(13 * var(--unit))}
+  #site-head .mark{width:calc(52 * var(--unit));height:calc(52 * var(--unit))}
+  #site-head .brand-name,#site-head .brand-name span:last-child{font-size:calc(19 * var(--unit))}
+  #site-head .brand-name{top:calc(2 * var(--unit))}
+  #site-head nav{font-size:calc(16 * var(--unit));gap:calc(24 * var(--unit));margin-top:calc(-4 * var(--unit))}
+  #site-head nav>a,#site-head nav>button{padding:calc(8 * var(--unit)) 0 calc(13 * var(--unit))}
+  #site-head nav a.active::after{width:calc(4 * var(--unit));height:calc(4 * var(--unit));bottom:calc(9 * var(--unit))}
+  #orin-study h1{font-size:clamp(42px,3.8966667vw,calc(58.333333 * var(--unit)))}
+  #orin-study .motto-zh{font-size:clamp(18px,1.67vw,calc(25 * var(--unit)))}
+  #orin-study .down{bottom:clamp(20px,4svh,calc(36 * var(--unit)));width:calc(44 * var(--unit));min-height:calc(44 * var(--unit));left:50%;transform:translateX(-50%)}
+  #orin-study .down .arrow{font-size:calc(20 * var(--unit))}
+  #orin-study .projects{
+    padding:clamp(48px,10svh,calc(90 * var(--unit))) 0 clamp(56px,12svh,calc(110 * var(--unit)));
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  #orin-study .project-grid,#orin-study .section-head{width:var(--content-width);max-width:none}
+  #orin-study .section-head{margin-bottom:calc(38 * var(--unit));gap:20px}
+  #orin-study .project-grid{gap:calc(30 * var(--unit))}
+  #orin-study .project-grid>article{min-width:0}
+  #orin-study .preview{height:clamp(230px,23.81vw,calc(350 * var(--unit)))}
+  #orin-study h2{font-size:calc(27 * var(--unit))}
+  #orin-study h3{font-size:calc(21 * var(--unit))}
+  #orin-study .desc{font-size:calc(16 * var(--unit));margin-top:calc(10 * var(--unit))}
+  #orin-study .caption{margin-top:calc(23 * var(--unit));gap:calc(10 * var(--unit))}
+  #orin-study .status,#orin-study .sample-note,#orin-study .eyebrow,#orin-study .preview-label{font-size:calc(12 * var(--unit))}
+  #orin-study .eyebrow{margin-bottom:calc(12 * var(--unit))}
+  #orin-study .preview-label{bottom:calc(15 * var(--unit));left:calc(18 * var(--unit))}
+  #orin-study .timeline{height:calc(126 * var(--unit))}
+  #orin-study .track:nth-child(1){top:calc(36 * var(--unit))}
+  #orin-study .track:nth-child(2){top:calc(82 * var(--unit))}
+  #orin-study .event{height:calc(7 * var(--unit))}
+  #orin-study .event:nth-child(3){top:calc(33 * var(--unit))}
+  #orin-study .event:nth-child(4){top:calc(79 * var(--unit))}
+  #orin-study .sculpture{width:calc(100 * var(--unit));height:calc(100 * var(--unit));margin-top:calc(-36 * var(--unit))}
+  #orin-study .sculpture:before{width:calc(60 * var(--unit));height:calc(60 * var(--unit));left:calc(20 * var(--unit) - 1px);top:calc(20 * var(--unit) - 1px)}
+  #orin-study .sculpture:after{top:calc(100 * var(--unit) - 1px);height:calc(48 * var(--unit));left:calc(50 * var(--unit) - 1px)}
+  #orin-study .base{width:calc(55 * var(--unit));height:calc(16 * var(--unit));top:calc(50% + 72 * var(--unit))}
+  #orin-study footer{width:var(--content-width);font-size:calc(12 * var(--unit));padding:calc(27 * var(--unit)) 0 calc(30 * var(--unit));flex-shrink:0}
+  dialog#info-panel,dialog#nav-panel{width:min(calc(520 * var(--unit)),calc(100% - 40px));max-height:calc(100svh - 40px);padding:calc(44 * var(--unit))}
+  dialog#info-panel p{font-size:calc(16 * var(--unit))}
+}
+
+/* 日志页：阅读页，正文用系统字体栈而非思源黑体子集（见 README「日志」一节），
+   也不随首页的 --unit 放大；中文长文的行高比首页宽松，行宽压在 38rem 以内便于阅读。
+   与首页共用本文件，分工是：顶部页头（#site-head）、两个弹窗、跳过链接是全站共用
+   chrome，规则在文件上半部分；日志正文的规则全部限定在 #journal 下。
+
+   写正文规则时一律用「#journal article …」。chrome 里同样有 a / img / p / h2 /
+   :focus-visible，而 #journal 是 id、chrome 规则是类，id 只要一个就压得过——
+   宽口径的 #journal img 会让品牌 logo 的 width/height 双双失效（那张 SVG 只有
+   viewBox，于是按原始尺寸渲染并带上 2em 外边距），#journal a 会把页头导航染成橙色。
+   article 是正文的完整边界：列表页的 .list、每篇日志的正文都在它里面。 */
+#journal{
+  --paper:#fcfbf8;--ink:#282925;--muted:#76776e;--line:#e6e5de;--tile:#f0efe9;
+  color:var(--ink);background:var(--paper);color-scheme:light;min-height:100svh;
+  font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+}
+#journal article{box-sizing:border-box;width:calc(100% - 48px);max-width:840px;margin:20px auto 0;padding:40px clamp(28px,8vw,112px) 80px;background:#fff;overflow-wrap:anywhere}
+/* 列表页的内容比阅读页铺得开：方图要占掉 269px，若再留阅读页那 112px 的纸内留白，
+   右侧正文只剩 315px。纸面宽度不变（与阅读页同一张白纸），收的是纸内的左右留白。 */
+#journal article.journal-index{padding:32px clamp(28px,4.5vw,56px)}
+#journal{padding-bottom:80px}
+#journal article>header time{margin:8px 0 0}
+#journal article>header{margin-bottom:28px}
+#journal time{display:block;font-size:13px;letter-spacing:.04em;color:var(--muted);margin-bottom:8px}
+#journal h1{font-size:29px;font-weight:500;line-height:1.45;margin:0}
+#journal article h2{font-size:21px;font-weight:500;line-height:1.5;margin:2.5em 0 .7em}
+#journal h3{font-size:18px;font-weight:500;margin:2em 0 .6em}
+#journal article p{font-size:17px;line-height:1.75;margin:1em 0}
+#journal article img{display:block;max-width:100%;height:auto;margin:2em 0}
+#journal blockquote{margin:1.8em 0;padding-left:1.1em;border-left:2px solid var(--line);color:var(--muted)}
+#journal ul,#journal ol{padding-left:1.5em;font-size:17px;line-height:1.95}
+#journal li{margin:.45em 0}
+#journal article a{color:#b65300}
+#journal hr{border:0;border-top:1px solid var(--line);margin:3em 0}
+#journal code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em;background:var(--tile);padding:.1em .35em}
+#journal pre{background:var(--tile);padding:16px;overflow-x:auto;font-size:14px;line-height:1.6}
+#journal pre code{background:none;padding:0}
+#journal .list{list-style:none;padding:0;margin:0;font-size:17px;--thumb:269px}
+/* 每条日志：左图右字。缩略图是**定尺方图**，边长 = 右侧「标题顶到阅读全文底」的高度，
+   于是两栏天然齐平，上下都不留半截空白。
+   边长 269px 是由字体与行高算出来的，正文那几处字号一行高改了就要跟着重算：
+   标题 22×1.45=32 + 6 + 日期 18 + 8 +（摘要上边距 12 + 5×16×1.75=140 + 下边距 10）+ 阅读全文 43。
+   试过不写死：`aspect-ratio:1` 配 `align-self:stretch` 让高度自己撑，结果弹性盒先拿图片
+   的固有宽度（480px）当基准，图框撑到 482px，把文字挤成一条竖线；改绝对定位填充则塌成 2px。
+   宽度写死之后 `object-fit:cover` 对方图不裁，将来放横图会裁成中间的正方形。
+   右边文字块的高度另由 @media(min-width:701px) 里的「标题一行 + 摘要五行」钉死——
+   少了那两条，标题一折行、摘要一短，右栏就变高变矮，配图立刻对不齐。
+   结构上的疏漏（配图不是正方、少了一层 .entry）由 npm run check 里的
+   scripts/check-journal.mjs 兜底。 */
+#journal .list li{display:flex;gap:clamp(20px,2.6vw,32px);align-items:flex-start;padding:40px 0;border-bottom:1px solid var(--line);margin:0}
+/* display:block 不能省：堆叠时 <a> 退回行内盒，行框会比图片高出几十像素。 */
+#journal .list .thumb{display:block;flex:none;box-sizing:border-box;width:var(--thumb);height:var(--thumb);border:1px solid var(--line);background:var(--tile);overflow:hidden;transition:opacity .2s}
+#journal .list .thumb:hover{opacity:.86}
+#journal .list .thumb img{display:block;width:100%;height:100%;object-fit:cover;margin:0}
+#journal .list .entry{flex:1;min-width:0}
+#journal .list li:first-child{padding-top:0}
+#journal .list li:last-child{padding-bottom:0;border-bottom:0}
+#journal .list h2{font-size:22px;line-height:1.45;margin:0 0 6px}
+#journal .list h2 a{color:var(--ink)}
+#journal .list a:hover{color:#b65300}
+#journal .list .read-more{display:inline-block;font-size:14px;color:var(--muted);padding:8px 0}
+#journal .list .read-more:hover{color:#b65300}
+#journal .references{border-top:1px solid var(--line);margin-top:32px;padding-top:16px}
+#journal .references ol{list-style:none;padding-left:2em;font-size:12px;color:var(--muted);line-height:1.6}
+#journal .references li{position:relative;scroll-margin-top:24px}
+#journal .reference-number{position:absolute;left:-2em}
+#journal article .references a,#journal article sup a{color:var(--muted)}
+#journal article .references a:hover,#journal article sup a:hover{color:#b65300}
+#journal sup{font-size:.7em;line-height:0}
+#journal sup a{text-decoration:none}
+#journal .list time{margin:0}
+/* 摘要竖向裁到五行，左缘与标题对齐（原来是缩进 12px 的悬挂缩进）。
+   -webkit-line-clamp 是各引擎通用的那个名字，别删。 */
+#journal .list p{margin:12px 0 10px;line-height:1.75;font-size:16px;color:#64655f;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden}
+#journal .motto-line{display:block;text-indent:2em}
+#journal article .back-to-journal{display:inline-block;margin-bottom:24px;font-size:13px;color:var(--muted);text-decoration:none}
+#journal article .back-to-journal:hover{color:#b65300}
+#journal .list a{text-decoration:none}
+#journal .empty{color:var(--muted)}
+#journal article :focus-visible{outline:2px solid #ff7900;outline-offset:4px}
+
+/* 列表页的「日志」大标题只在窄屏出现（.list-head 只加在 dist/journal/index.html 上——
+   #journal h1 同时命中每篇日志的标题，按断点藏 h1 会把所有日志的标题一起藏掉）。
+   宽屏页头导航里的「日志」已经带当前页标记，标题是重复的；窄屏导航收进抽屉后，
+   页面上没有任何位置提示，标题才有用。
+
+   断点必须与 placeNav() 的 700px 完全一致（那边是 matchMedia('(max-width: 700px)')），
+   换成别的值就会出现「导航在抽屉里、标题也被藏了」的空档。
+
+   宽屏不是 display:none 而是裁成 1×1：视觉上不出现，标题仍留在无障碍树里，读屏用户
+   的标题导航不受影响。外层 header 必须一起裁，只裁 h1 的话它那 44px 下边距会留成死白。 */
+/* 左图右字那套版式（≥701px）里，右侧文字块的高度必须是定值，否则定尺方图就对不齐。
+   下面两条把高度钉死，缺一条就会漏：
+     · 标题裁成一行——长标题折行会让右栏高出一行（约 32px）；
+     · 摘要最少占五行——摘要短于五行会让右栏矮一截。
+   堆叠版式（≤700px）不吃这套，所以两条只在这里生效。 */
+@media(min-width:701px){
+  #journal .list-head{position:absolute;width:1px;height:1px;margin:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  #journal .list h2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden}
+  #journal .list p{min-height:8.75em}   /* 8.75em = 5 行 × 1.75 行高，跟着字号走 */
+}
+/* 列表换成图上字下，比正文那档 600px 提前到 700px：601–700 这段里左图右字只剩两百来像素
+   给文字，标题要折行，而缩略图是定尺方图，右栏一高就上下对不齐了。断点与上面 placeNav()
+   的 700px 取齐，一个页面里不出现第三套断点。
+
+   窄屏是**另一套定值**（同分辨率内写死，跨断点不必相同）：图占满卡片宽度时一条日志要占掉
+   将近一屏——700px 宽的窗口里图有 589px 见方。所以窄屏把图缩到卡片宽度的 68%、居中、不裁，
+   并且封顶 340px：卡片更宽时按 68% 算会一路涨回去，340 是「一条仍然只占大半屏」的上限。
+   摘要也一并收到四行——手机上一行二十来个字，五行会把条目拖得过长。
+   宽屏那套（定尺 269、五行）不受影响，它在 @media(min-width:701px) 里。 */
+@media(max-width:700px){
+  #journal .list li{display:block;padding:32px 0}
+  #journal .list .thumb{width:min(68%,340px);height:auto;margin:0 auto 18px}
+  #journal .list .thumb img{height:auto}
+  #journal .list p{-webkit-line-clamp:4}
+}
+@media(max-width:600px){
+  #journal h1{font-size:24px}
+  #journal article{width:calc(100% - 32px);margin-top:12px;padding:28px 24px 44px}
+  #journal{padding-bottom:32px}
+  #journal .list h2{font-size:21px}
+  #journal article p{font-size:16px}
+  #journal article.journal-index{padding:24px}
+  #journal .list p{font-size:15px}
+  #journal .list time{width:auto}
+}

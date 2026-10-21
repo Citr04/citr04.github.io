@@ -1,53 +1,25 @@
 <!doctype html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#f5f9f8" />
-    <title>寿来 · 新地址</title>
-    <style>
-      * { box-sizing: border-box; }
-      body { margin: 0; background: #f5f9f8; color: #203c34; font: 16px/1.7 system-ui, sans-serif; }
-      main { max-width: 440px; margin: 12vh auto; padding: 24px; }
-      h1 { font-size: 24px; }
-      p { color: #61756e; overflow-wrap: anywhere; }
-      a { display: block; margin-top: 24px; padding: 14px; border-radius: 16px; background: #188568; color: white; text-align: center; text-decoration: none; }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>寿来有了固定的新地址</h1>
-      <p>新地址：<strong>/shoulai/</strong></p>
-      <p>同一浏览器中的现有记录会继续保留。若尚未备份，请先保留一份导出的备份文件；不要清除网站数据。</p>
-      <p>请先关闭其他寿来窗口，再进入新版。确认记录正常后，可从新地址添加桌面入口。</p>
-      <a id="continue" href="/shoulai/">进入寿来</a>
-    </main>
-    <script>
-      const link = document.getElementById('continue');
-      link.href = '/shoulai/' + location.hash;
-      // 只注销经身份握手确认的根路径迁移 SW，不操作新子路径或其他项目的 SW。
-      async function retireMigrationWorker() {
-        if (!('serviceWorker' in navigator)) return;
-        const registration = await navigator.serviceWorker.getRegistration('/');
-        if (!registration || registration.scope !== location.origin + '/' || !registration.active) return;
-        const channel = new MessageChannel();
-        const identity = await new Promise(resolve => {
-          const timer = setTimeout(() => { channel.port1.close(); resolve(null); }, 1000);
-          channel.port1.onmessage = event => {
-            clearTimeout(timer);
-            channel.port1.close();
-            resolve(event.data);
-          };
-          registration.active.postMessage({ type: 'SHOULAI_MIGRATION_PING' }, [channel.port2]);
-        });
-        if (identity === 'shoulai-root-migration-v1') await registration.unregister();
-      }
-      const cleanup = retireMigrationWorker().catch(() => undefined);
-      link.addEventListener('click', async event => {
-        event.preventDefault();
-        await Promise.race([cleanup, new Promise(resolve => setTimeout(resolve, 1500))]);
-        location.assign(link.href);
-      });
-    </script>
-  </body>
-</html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ORIN Lab · 澄心实验室</title><meta name="description" content="这里是澄心实验室 ORIN Lab，留存个人记忆残渣。焚尽的躯壳将在此处得到安歇，灵魂与思维将继续燃烧。"><meta name="robots" content="noindex,nofollow"><meta name="color-scheme" content="light"><meta property="og:title" content="ORIN Lab · 澄心实验室"><meta property="og:description" content="焚尽的躯壳将在此处得到安歇，灵魂与思维将继续燃烧。"><link rel="icon" type="image/svg+xml" href="/assets/orin-logo.svg"><link rel="preload" href="/assets/noto-sans-sc-subset-regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/noto-sans-sc-subset-light.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/eb-garamond-subset-regular.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script></head><body><div id="orin-study" aria-label="ORIN Lab">
+  
+  <a class="skip" href="#orin-projects">跳到项目内容</a><section class="hero" id="orin-top">
+    <header id="site-head">
+      <a class="brand" href="#orin-top" aria-label="ORIN Lab 首页"><img class="mark" src="/assets/orin-logo.svg" alt="橙色 O 形标识"><span class="brand-name"><span>澄心实验室</span><span>ORIN Lab</span></span></a>
+      <nav aria-label="主导航"><a class="active" aria-current="page" href="#orin-top">首页</a><a href="#orin-projects">项目</a><a href="/journal/">日志</a><button data-panel="about">关于</button><button data-panel="contact">联系</button></nav>
+      <button class="menu" aria-label="导航" aria-expanded="false"></button>
+    </header>
+    <div class="motto-wrap"><h1>Non omnis moriar.</h1><p class="motto-zh"><span>生死去来兮不碍真圆</span><span>飞鸿印雪兮爪趾宛然</span></p></div>
+    <button class="down" aria-label="向下浏览项目"><span class="arrow">↓</span></button>
+  </section>
+  <div class="project-screen">
+  <section class="projects" id="orin-projects">
+    <div class="section-head"><div><span class="eyebrow">EXPLORATIONS</span><h2>正在探索</h2></div><span class="sample-note">布局示意 · 项目待定</span></div>
+    <div class="project-grid">
+      <article><div class="preview" aria-label="创作工具的抽象视觉占位，非产品截图"><div class="timeline"><span class="track"></span><span class="track"></span><span class="event"></span><span class="event"></span><span class="cursor"></span></div><span class="preview-label">VISUAL STUDY / 01</span></div><div class="caption"><h3 data-project-title="0">创作工具</h3><span class="status">展示示意</span></div><p class="desc">让零散的想法，逐渐拥有自己的形状。</p></article>
+      <article><div class="preview" aria-label="实体实验的抽象视觉占位，非实物照片"><div class="sculpture"></div><div class="base"></div><span class="preview-label">VISUAL STUDY / 02</span></div><div class="caption"><h3 data-project-title="1">实体实验</h3><span class="status">展示示意</span></div><p class="desc">把屏幕里的一个念头，带到真实世界。</p></article>
+    </div>
+  </section>
+  <footer><span>© <span id="year"></span> ORIN Lab</span><span>备案信息 · 待补充</span></footer>
+  </div>
+
+<dialog id="nav-panel" aria-label="导航"><button class="close" aria-label="关闭">×</button></dialog>
+<dialog id="info-panel" aria-labelledby="panel-title"><button class="close" aria-label="关闭">×</button><h2 id="panel-title"></h2><div id="panel-copy"></div></dialog></div></body></html>
