@@ -106,12 +106,12 @@ dialog#info-panel .about-fracture{position:fixed;inset:0;width:100vw;height:100v
    新增文案若引入子集外的字，会回退到系统字体——需重新生成子集，配方见 README。 */
 @font-face{
   font-family:"Noto Sans SC";
-  src:url("/assets/noto-sans-sc-subset-regular.woff2") format("woff2");
+  src:url("/assets/noto-sans-sc-subset-regular.woff2?v=a45025496761") format("woff2");
   font-weight:400;font-style:normal;font-display:swap;
 }
 @font-face{
   font-family:"Noto Sans SC";
-  src:url("/assets/noto-sans-sc-subset-light.woff2") format("woff2");
+  src:url("/assets/noto-sans-sc-subset-light.woff2?v=7a48e4f8d42d") format("woff2");
   font-weight:300;font-style:normal;font-display:swap;
 }
 /* EB Garamond Regular（SIL OFL 1.1），拉丁题辞专用。子集只含 `Non omnis moriar.`
@@ -119,7 +119,7 @@ dialog#info-panel .about-fracture{position:fixed;inset:0;width:100vw;height:100v
    特性会经布局闭包拖进 78 个变体字形，子集涨到 5.8KB。生成见 scripts/eb-garamond-subset.py。 */
 @font-face{
   font-family:"EB Garamond";
-  src:url("/assets/eb-garamond-subset-regular.woff2") format("woff2");
+  src:url("/assets/eb-garamond-subset-regular.woff2?v=b5be1d00dfc9") format("woff2");
   font-weight:400;font-style:normal;font-display:swap;
 }
 /* 题辞下方的中文一行，出自明·宋濂《大天界寺住持白庵禅师行业碑铭》：
